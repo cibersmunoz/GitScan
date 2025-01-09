@@ -8,5 +8,8 @@ jobs:
     prueba:
         runs-on: ubuntu-latest
         steps:
-            - name: chech ssh
-              run: ssh -v
+            - name: Instalar sshpass
+              run: sudo apt-get update && sudo apt-get install -y sshpass
+            - name: Conectar por SSH
+              run: sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "echo 'Conexión exitosa'"
+                
