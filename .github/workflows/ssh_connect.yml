@@ -11,6 +11,7 @@ jobs:
             - name: Instalar sshpass
               run: sudo apt-get update && sudo apt-get install -y sshpass
             - name: Conectar por SSH
-              run: sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "echo 'Conexión exitosa'"
-            - name: Hola mundo
-              run: echo "Hola mundo" > hola_mundo.txt
+             run: |
+                sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "
+                echo 'Conexión exitosa' &&
+                echo 'Hola mundo' > hola_mundo.txt"
