@@ -11,7 +11,7 @@ jobs:
             - name: instalar nmap
               run: sudo apt-get install nmap
             - name: tirar nmap
-              run: nmap nike.com
+              run: nmap nike.com -oN nmap_report.txt
             - name: Subir reporte de escaneo
               uses: actions/upload-artifact@v3
               with:
