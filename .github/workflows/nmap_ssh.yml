@@ -1,0 +1,19 @@
+name: NMAP SSH
+
+on:
+    push:
+        branches:
+              - master
+jobs:
+    hola:
+        runs-on: ubuntu-latest
+        steps:
+            - name: instalar nmap
+              run: sudo apt-get install nmap
+            - name: tirar nmap
+              run: nmap nike.com -oN nmap_report.txt
+            - name: Subir reporte de escaneo
+              uses: actions/upload-artifact@v3
+              with:
+                name: nmap-scan
+                path: nmap_report.txt
