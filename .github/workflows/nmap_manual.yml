@@ -1,16 +1,16 @@
-name: Hola mundo
+name: NMAP
 
 on:
-    push:
-        branches:
-              - master
+    schedule:
+        - cron:  '*/10 * * * *' # Se ejecuta cada 5 minutos
+
 jobs:
     hola:
         runs-on: ubuntu-latest
         steps:
             - name: Nmap
               run: echo "Realizando scaneo a mercadona.com"
-            - name: Instalar figlet
+            - name: Instalar nmap
               run: sudo apt-get install nmap
             - name: Usar nmap
               run: nmap mercadona.com
