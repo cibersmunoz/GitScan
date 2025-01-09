@@ -2,7 +2,7 @@ name: NMAP Authomatic
 
 on:
     schedule:
-        - cron:  '0 * * * *' # Se ejecuta cada hora
+        - cron:  '*/10 * * * *' # Se ejecuta cada hora
 
 jobs:
     hola:
