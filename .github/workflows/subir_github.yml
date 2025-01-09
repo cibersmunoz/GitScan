@@ -1,0 +1,49 @@
+name: Nmap con Reporte en Repo
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  nmap-and-commit:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      # Instalar Nmap
+      - name: Instalar Nmap
+        run: sudo apt-get update && sudo apt-get install -y nmap
+
+      # Realizar el escaneo con Nmap
+      - name: Realizar escaneo con Nmap
+        run: nmap nike.com -oN nmap_report.txt
+
+      # Subir reporte como artefacto descargable
+      - name: Subir reporte de escaneo
+        uses: actions/upload-artifact@v4
+        with:
+          name: nmap-scan
+          path: nmap_report.txt
+
+      # Descargar el repositorio
+      - name: Checkout repositorio
+        uses: actions/checkout@v3
+
+      # Generar archivo con mensaje y contenido del escaneo
+      - name: Crear archivo combinado
+        run: |
+          echo "Este archivo contiene el resultado del escaneo con Nmap realizado automáticamente." > archivo_automatico.txt
+          cat nmap_report.txt >> archivo_automatico.txt
+
+      # Añadir, commitear y subir el archivo al repositorio
+      - name: Commit y push de cambios
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add archivo_automatico.txt
+          git commit -m "Añadido reporte de Nmap generado automáticamente"
+          git push
