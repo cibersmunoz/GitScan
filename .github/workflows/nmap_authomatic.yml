@@ -1,0 +1,16 @@
+name: NMAP Authomatic
+
+on:
+    schedule:
+        - cron:  '0 * * * *' # Se ejecuta cada hora
+
+jobs:
+    hola:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Nmap
+              run: echo "Realizando scaneo a mercadona.com"
+            - name: Instalar nmap
+              run: sudo apt-get install nmap
+            - name: Usar nmap
+              run: nmap nike.com

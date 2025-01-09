@@ -1,16 +1,19 @@
-name: NMAP Authomatic
+name: nmap manual
 
 on:
-    schedule:
-        - cron:  '0 * * * *' # Se ejecuta cada hora
-
+    push:
+        branches:
+              - master
 jobs:
     hola:
         runs-on: ubuntu-latest
         steps:
-            - name: Nmap
-              run: echo "Realizando scaneo a mercadona.com"
-            - name: Instalar nmap
+            - name: instalar nmap
               run: sudo apt-get install nmap
-            - name: Usar nmap
-              run: nmap mercadona.com
+            - name: tirar nmap
+              run: nmap nike.com
+            - name: Subir reporte de escaneo
+              uses: actions/upload-artifact@v3
+              with:
+                name: nmap-scan
+                path: nmap_report.txt
