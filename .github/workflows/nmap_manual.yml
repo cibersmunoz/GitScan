@@ -1,0 +1,16 @@
+name: Hola mundo
+
+on:
+    push:
+        branches:
+              - master
+jobs:
+    hola:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Nmap
+              run: echo "Realizando scaneo a mercadona.com"
+            - name: Instalar figlet
+              run: sudo apt-get install nmap
+            - name: Usar nmap
+              run: nmap mercadona.com
