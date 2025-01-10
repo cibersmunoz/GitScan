@@ -1,0 +1,34 @@
+name: Nmap Scan and Commit Report
+
+on:
+  workflow_dispatch: # Permite disparar manualmente la acción
+  schedule:
+    - cron: "0 0 * * *" # Opcional: programa el escaneo diario a medianoche
+
+jobs:
+  nmap_scan_and_commit:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Nmap
+        run: sudo apt-get update && sudo apt-get install -y nmap
+
+      - name: Perform Nmap scan
+        run: nmap nike.com -oN nmap_report.txt
+
+      - name: Commit and push scan report
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          mv nmap_report.txt "reports/nmap_report_$(date +'%Y%m%d%H%M%S').txt"
+          git add reports/
+          git commit -m "Add Nmap scan report: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
