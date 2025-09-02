@@ -1,0 +1,11 @@
+# Nmap 7.94SVN scan initiated Tue Sep  2 01:42:48 2025 as: nmap -oN nmap_report.txt nike.com
+Nmap scan report for nike.com (13.224.214.30)
+Host is up (0.0059s latency).
+Other addresses for nike.com (not scanned): 13.224.214.60 13.224.214.88 13.224.214.47
+rDNS record for 13.224.214.30: server-13-224-214-30.phl50.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+
+# Nmap done at Tue Sep  2 01:42:53 2025 -- 1 IP address (1 host up) scanned in 4.64 seconds
